@@ -10,6 +10,16 @@ jobs:
       - name: Build static site
         run: node build.mjs
       - name: Test tools and output
-        run: node --test tests.mjs
+        run: node --test tests.mjs report-tests.mjs
       - name: Check initialization syntax
-        run: bash -n init.sh
+        run: bash -n init.sh && bash -n collect.sh
+      - name: Test local collector without network or benchmarks
+        run: |
+          bash collect.sh --output /tmp/toolbox-inventory.json
+          jq -e '.schema_version == "1.0.0" and .environment.memory_bytes > 0 and .privacy.local_only == true' /tmp/toolbox-inventory.json
+          node --input-type=module -e "import fs from 'node:fs'; import {parseReport} from './reports.mjs'; const r=parseReport(fs.readFileSync('/tmp/toolbox-inventory.json','utf8')); if(!r.environment.vcpus) process.exit(1);"
+      - name: Test no-clobber and existing YABS import
+        run: |
+          if bash collect.sh --output /tmp/toolbox-inventory.json; then echo 'Unexpected overwrite'; exit 1; fi
+          bash collect.sh --yabs-file fixtures/yabs-example.json --output /tmp/toolbox-yabs.json
+          node --input-type=module -e "import fs from 'node:fs'; import {parseReport} from './reports.mjs'; const r=parseReport(fs.readFileSync('/tmp/toolbox-yabs.json','utf8')); if(r.disk.length !== 4) process.exit(1);"

@@ -10,7 +10,7 @@ jobs:
       - name: Build static site
         run: node build.mjs
       - name: Test tools and output
-        run: node --test tests.mjs report-tests.mjs
+        run: node --test tests.mjs report-tests.mjs maintenance-tests.mjs
       - name: Check initialization syntax
         run: bash -n init.sh && bash -n collect.sh
       - name: Test local collector without network or benchmarks

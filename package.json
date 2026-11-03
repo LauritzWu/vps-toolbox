@@ -1,1 +1,1 @@
-{"name":"vps-toolbox","version":"0.2.0","type":"module","private":true,"description":"Local-first VPS tools and deployment guides","scripts":{"build":"node build.mjs","test":"node --test tests.mjs report-tests.mjs","dev":"node serve.mjs"},"engines":{"node":">=22"}}
+{"name":"vps-toolbox","version":"0.2.0","type":"module","private":true,"description":"Local-first VPS tools and deployment guides","scripts":{"build":"node build.mjs","test":"node --test tests.mjs report-tests.mjs maintenance-tests.mjs","dev":"node serve.mjs"},"engines":{"node":">=22"}}

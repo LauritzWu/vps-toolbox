@@ -68,3 +68,10 @@ bash collect.sh --yabs --allow-load --output report.json
 ## 隐私边界更新（2026-11-03）
 
 新增 /privacy。NodeQuality 改为仅官方来源，不提供运行命令；TcpQuality、ECS、流媒体检测和 Speedtest 只提供官方入口与数据行为说明，尚未完成全链审查。报告继续本地处理，不新增 SSH、账号、云报告或公开排行榜。反馈渠道为公开 GitHub Issues，禁止提交秘密资料。
+
+## 版本与上游巡检
+
+upstream-snapshot.json 是人工核查快照，不是实时更新承诺。工具详情分别显示采用方式、上游提交和实测范围。上游巡检每周一 10:23（新加坡时间）及手动触发，输出 Actions Summary 和保留 30 天的报告附件；发现变化、链接失效或未核实结果时检查失败，按 GitHub 通知设置提示维护者。不写入仓库、不执行上游代码、不自动升级；人工复核后更新快照。GitHub 定时任务可能延迟，长期无活动时也可能暂停。
+
+完整新手教程：/article?id=report-walkthrough。
+

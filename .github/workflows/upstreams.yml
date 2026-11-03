@@ -1,0 +1,27 @@
+name: Upstream link and version review
+on:
+  schedule:
+    - cron: '23 2 * * 1'
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: upstream-review
+  cancel-in-progress: false
+jobs:
+  review:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+      - name: Check links and upstream commits without executing scripts
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: node maintenance/check-upstreams.mjs
+      - name: Retain review report
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: upstream-review
+          path: maintenance-results/
+          retention-days: 30

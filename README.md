@@ -7,7 +7,7 @@
 - 深色响应式首页、脚本库、VPS 测评、部署中心、在线工具、技术博客。
 - 11 项工具目录，关键词搜索、场景筛选、权限/流量/来源说明，含数据去向说明，已核对运行路径可确认后复制命令；新增高风险入口仅链接官方来源。
 - Ubuntu/Debian 基础初始化脚本：默认预检，明确确认后安装工具；不修改 SSH、防火墙和内核。
-- YABS、NodeQuality、NextTrace、IPQuality 与三网路由的上游命令入口。
+- YABS、NodeQuality、NextTrace、IPQuality 与三网路由的上游入口；NodeQuality 当前仅官方来源。
 - sing-box/Hysteria2 官方部署指引、JSON 本地部署检查计划。
 - IPv4/IPv6 的 RIPEstat BGP/ASN 查询、IPv4 CIDR 计算、JSON 格式化。
 - collect.sh 本地系统报告，可选 YABS 磁盘测试（默认关闭网络测速和 Geekbench），也可包装已有 YABS JSON。
@@ -33,7 +33,7 @@ npm run dev
 
 ## Cloudflare 免费托管
 
-首次采用 Cloudflare Pages Direct Upload，部署 dist/ 内文件（可打 ZIP）。使用项目 Custom domains 添加 tools.lauritz.top，由 Pages 创建对应记录与 HTTPS 证书。不得修改主域名、probe 或 sub 的现有记录。此项目不是 Git 自动部署；源代码变更后需要 build/test 并上传新 dist。Direct Upload 项目不能直接切换 Git 集成，若后续需要可重建 Git 集成项目或使用受限 API token 的 CI；不要提交 token。
+当前生产项目为 vps-toolbox-git，连接且仅授权 LauritzWu/vps-toolbox，生产分支 main。构建命令 `npm run build && npm test`，输出 dist，Node 22。main 新提交自动构建并发布；Cloudflare 构建测试失败时不替换线上版本。version.json 显示实际发布提交。旧 vps-toolbox-lauritz 保留为手动上传备份，已解除 tools 子域名绑定。仅迁移 tools CNAME 到 vps-toolbox-git.pages.dev，不修改主域名、probe 或 sub。
 
 ## 数据与隐私
 
@@ -55,7 +55,7 @@ bash collect.sh --yabs --allow-load --output report.json
 
 ## Git 自动部署迁移
 
-现有 vps-toolbox-lauritz 为 Direct Upload。建议创建 vps-toolbox-git，连接且仅授权 LauritzWu/vps-toolbox，生产分支 main，无框架，构建命令 `npm run build && npm test`，输出目录 dist，Node 22。新项目预览、全部测试通过后才转移 tools.lauritz.top，并保留旧项目以便回退。Cloudflare GitHub 授权及迁移尚须在控制台完成，不要把准备好的构建配置当成已启用自动发布。version.json 将显示实际构建提交，供后续自动部署验证。
+2026-11-03 已验证 main 提交自动触发 Pages 生产部署。域名通过新项目 Custom domains 绑定并启用 HTTPS。更新方式：修改源码 → 提交 main → 查看 GitHub Actions 与 Cloudflare 构建结果 → 核对 tools.lauritz.top/version.json 的 commit。回退优先使用 Pages 已有成功部署的回滚功能；必要时可把 tools 重新绑定到保留的旧项目。不要提交任何 token 或检测报告。
 
 ## 上游及许可
 

@@ -14,3 +14,17 @@
 | RIPEstat | https://stat.ripe.net/docs/data-api/ | 用户主动查询 BGP/ASN；不构成 IP 风险评估 |
 
 本站未复制第三方脚本到发行包，仅展示来源和命令。原项目版权与许可不由本站 MIT 替代。NodeQuality JSON/BenchOS、ArgoSBX 二级二进制与自更新在自动化接入前必须继续审查。
+
+## 2026-11-03 隐私复核
+
+NodeQuality 当前主入口存在打包结果并提交 api.nodequality.com 的逻辑，本站已移除执行命令。TcpQuality 核心含报告和 debug 包提交逻辑；默认行为未逐路径验证，仅展示官方入口。ECS 入口注明推荐 oneclickvirt/ecs，完整依赖与许可待审查。新增 RegionRestrictionCheck（AGPL-3.0）与 Ookla CLI（专有条款）均只链接官方来源，不分发程序或代接受条款。
+
+来源：
+- https://raw.githubusercontent.com/LloydAsp/NodeQuality/main/NodeQuality.sh
+- https://github.com/ibsgss/TcpQuality （GPL-3.0）
+- https://gitlab.com/spiritysdx/za/-/raw/main/ecs.sh
+- https://github.com/oneclickvirt/ecs
+- https://github.com/lmc999/RegionRestrictionCheck
+- https://www.speedtest.net/apps/cli
+
+说明核查不构成安全认证；未执行上述第三方脚本。第三方报告删除需要联系实际接收方。

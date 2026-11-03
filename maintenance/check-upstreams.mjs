@@ -9,7 +9,7 @@ export async function inspect(fetcher=fetch){
  const cache=new Map();const links=[];const versions=[];
  const request=async(url,api=false)=>{const h={...headers};if(api&&process.env.GITHUB_TOKEN)h.Authorization='Bearer '+process.env.GITHUB_TOKEN;try{const r=await fetcher(url,{headers:h,signal:AbortSignal.timeout(15000),redirect:'follow'});return {status:r.status,json:api&&r.ok?await r.json():null}}catch{return {error:'network_or_timeout'}}};
  const app=fs.readFileSync(new URL('../app.js',import.meta.url),'utf8');
- const urls=[...new Set([...scripts.map(s=>s.source),...scripts.flatMap(s=>[...(s.command||'').matchAll(/https:\/\/[^\s]+/g)].map(m=>m[0])),...[...app.matchAll(/link\('(https:[^']+)'/g)].map(m=>m[1])])];
+ const urls=[...new Set([...scripts.flatMap(s=>[s.source,s.codeUrl,s.docsUrl].filter(Boolean)),...scripts.flatMap(s=>[...(s.command||'').matchAll(/https:\/\/[^\s]+/g)].map(m=>m[0])),...[...app.matchAll(/link\('(https:[^']+)'/g)].map(m=>m[1])])];
  await Promise.all(urls.map(async url=>{const r=await request(url);links.push({url,status:r.status||null,state:classifyLink(r.status,r.error),error:r.error||null})}));
  for(const [id,m] of Object.entries(snapshot.records)){if(!m.repo)continue;const key=m.repo+'/'+m.branch;if(!cache.has(key))cache.set(key,await request('https://api.github.com/repos/'+m.repo+'/commits/'+m.branch,true));const r=cache.get(key);const sha=r.json?.sha||null;versions.push({id,repo:m.repo,pinned:m.pinned,recorded:m.upstream?.sha||null,latest:sha,state:compareVersion(m.pinned,sha),snapshotChanged:!!sha&&sha!==m.upstream?.sha,error:r.error||(r.status!==200?'HTTP '+r.status:null)})}
  return {checkedAt:new Date().toISOString(),links:links.sort((a,b)=>a.url.localeCompare(b.url)),versions};

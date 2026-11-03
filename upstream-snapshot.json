@@ -131,6 +131,19 @@
       "checkedAt": "2026-11-03T04:09:49.250Z",
       "adoption": "仅链接官方来源",
       "validation": "来源与说明核对；未做真实 VPS 全流程实测"
+    },
+    "iperf3": {
+      "repo": "esnet/iperf",
+      "branch": "master",
+      "pinned": null,
+      "upstream": {
+        "sha": "a004933607da4bc1faac9f10bff93a76e911b841",
+        "url": "https://github.com/esnet/iperf/commit/a004933607da4bc1faac9f10bff93a76e911b841",
+        "date": "2026-10-26T18:34:51Z"
+      },
+      "checkedAt": "2026-11-03T05:12:52.801Z",
+      "adoption": "使用教程；本机已安装版本",
+      "validation": "官方参数文档核对；未做双机实测"
     }
   }
 }

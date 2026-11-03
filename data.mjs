@@ -18,7 +18,10 @@ export const scripts = [
     "source": "https://github.com/LauritzWu/vps-toolbox/blob/main/collect.sh",
     "command": "curl -fL https://tools.lauritz.top/collect.sh -o collect.sh\nless collect.sh\nbash collect.sh --output report.json",
     "note": "需要 Bash 和 jq，不自动安装依赖。默认仅采集系统信息，不测试性能；--yabs --allow-load 才运行磁盘测试。输出文件不覆盖、不上传，可在 VPS 测评页导入。可选网络测速没有硬流量上限。",
-    "status": "本地采集"
+    "status": "本地采集",
+    "codeUrl": "https://github.com/LauritzWu/vps-toolbox/blob/main/collect.sh",
+    "docsUrl": "https://github.com/LauritzWu/vps-toolbox/blob/main/collect.sh#readme",
+    "outputGuide": "只有系统信息时没有跑分是正常现象；将 report.json 带到 VPS 测评页，不要把缺失项目看成零。"
   },
   {
     "id": "init",
@@ -40,7 +43,10 @@ export const scripts = [
     "file": "init.sh",
     "command": "curl -fL https://tools.lauritz.top/init.sh -o vps-init.sh\nless vps-init.sh\nsudo bash vps-init.sh --apply",
     "note": "本站基础脚本。先下载审阅，默认只预检。尚未完成各发行版虚拟机回归；不改 SSH、防火墙、内核或自动重启。",
-    "status": "实验脚本"
+    "status": "实验脚本",
+    "codeUrl": "https://github.com/LauritzWu/vps-toolbox/blob/main/init.sh",
+    "docsUrl": "https://github.com/LauritzWu/vps-toolbox#readme",
+    "outputGuide": "先检查预检清单，安装失败时保留错误信息；不要重复执行来掩盖问题。"
   },
   {
     "id": "yabs",
@@ -61,7 +67,10 @@ export const scripts = [
     "source": "https://github.com/masonr/yet-another-bench-script",
     "command": "curl -fL https://raw.githubusercontent.com/masonr/yet-another-bench-script/21f62408ecde9b23d4eec878f46a8292f1944aa0/yabs.sh -o yabs.sh\nless yabs.sh\nbash yabs.sh -w yabs.json",
     "note": "固定入口源码，内部依赖仍来自上游。Geekbench 可能向其结果服务提交测试，执行前阅读上游说明。本站未审计完整下载链。",
-    "status": "上游命令"
+    "status": "上游命令",
+    "codeUrl": "https://github.com/masonr/yet-another-bench-script/blob/21f62408ecde9b23d4eec878f46a8292f1944aa0/yabs.sh",
+    "docsUrl": "https://github.com/masonr/yet-another-bench-script#readme",
+    "outputGuide": "分别查看 fio 块大小、iperf 目标和 Geekbench 主版本；busy 表示未完成，不等于带宽为零。"
   },
   {
     "id": "nodequality",
@@ -82,7 +91,10 @@ export const scripts = [
     "source": "https://github.com/LloydAsp/NodeQuality",
     "command": null,
     "note": "上游默认把结果上传至 NodeQuality 服务并清理临时文件。chroot 不是安全隔离。固定主脚本不固定它的所有二级依赖。需要纯本地结果时暂不选择此路径。",
-    "status": "官方来源 · 含上传"
+    "status": "官方来源 · 含上传",
+    "codeUrl": "https://github.com/LloydAsp/NodeQuality/blob/a92fca6c0067df29ddd03fdc2fee6f3000f64545/NodeQuality.sh",
+    "docsUrl": "https://github.com/LloydAsp/NodeQuality#readme",
+    "outputGuide": "先查看上游上传行为及生成报告的公开范围；当前网页不支持直接导入其原始输出。"
   },
   {
     "id": "nexttrace",
@@ -103,7 +115,10 @@ export const scripts = [
     "source": "https://github.com/nxtrace/NTrace-core",
     "command": "nexttrace --json 1.1.1.1 > route.json",
     "note": "先按官方文档安装 NextTrace。这里仅生成已安装 CLI 的调用命令，不自动下载执行安装器。IP 地理数据的展示与再分发权限独立于代码许可。",
-    "status": "已安装 CLI"
+    "status": "已安装 CLI",
+    "codeUrl": "https://github.com/nxtrace/NTrace-core/tree/c93eabdb873313d19bab00d820551e2167c961c5",
+    "docsUrl": "https://github.com/nxtrace/NTrace-core#readme",
+    "outputGuide": "超时跳点不等于终点丢包；记录探测方向、协议、目标和测试时间。"
   },
   {
     "id": "ipquality",
@@ -124,7 +139,10 @@ export const scripts = [
     "source": "https://github.com/xykt/IPQuality",
     "command": "curl -fL https://raw.githubusercontent.com/xykt/IPQuality/main/ip.sh -o ip-quality.sh\nless ip-quality.sh\nbash ip-quality.sh",
     "note": "这是可变 main 分支的上游入口，运行前必须核对仓库及源码。各数据源分数不可直接平均，“解锁”不等于账号长期安全。本站不提供纯净 IP 保证。",
-    "status": "需核对上游"
+    "status": "需核对上游",
+    "codeUrl": "https://github.com/xykt/IPQuality/blob/87397e2c3196ec796f5477c83343c2354df601ea/ip.sh",
+    "docsUrl": "https://github.com/xykt/IPQuality#readme",
+    "outputGuide": "保留每个数据源的名称和未知项；风险标签不代表账号可用性或永久解锁。"
   },
   {
     "id": "china-route",
@@ -145,7 +163,10 @@ export const scripts = [
     "source": "https://github.com/nxtrace/NTrace-core",
     "command": "nexttrace -F",
     "note": "先安装 NextTrace。测试方向为 VPS → 中国目标，不证明你的宽带到 VPS 的去程路径。目标失效和中间跳不响应均不能直接判定线路差。",
-    "status": "已安装 CLI"
+    "status": "已安装 CLI",
+    "codeUrl": "https://github.com/nxtrace/NTrace-core/tree/c93eabdb873313d19bab00d820551e2167c961c5",
+    "docsUrl": "https://github.com/nxtrace/NTrace-core#readme",
+    "outputGuide": "只说明 VPS 到中国目标的回程；不能直接反推出你家宽带到 VPS 的去程。"
   },
   {
     "id": "tcpquality",
@@ -166,7 +187,10 @@ export const scripts = [
     ],
     "command": null,
     "status": "仅官方来源",
-    "checkedAt": "2026-11-03"
+    "checkedAt": "2026-11-03",
+    "codeUrl": "https://github.com/ibsgss/TcpQuality/blob/75a4e487d2038b85d04a0eb6a7f687d3547de572/runTcpQuality.sh",
+    "docsUrl": "https://github.com/ibsgss/TcpQuality#readme",
+    "outputGuide": "结合终点、采样次数和时段判断，先核对报告上传设置；当前网页不支持其原始文本导入。"
   },
   {
     "id": "ecs",
@@ -187,7 +211,10 @@ export const scripts = [
     ],
     "command": null,
     "status": "仅官方来源",
-    "checkedAt": "2026-11-03"
+    "checkedAt": "2026-11-03",
+    "codeUrl": "https://github.com/oneclickvirt/ecs/tree/01a8003f840292396d1364a1dfef82a9a8f8b597",
+    "docsUrl": "https://github.com/oneclickvirt/ecs#readme",
+    "outputGuide": "先确认 Go 或旧 Shell 版本；不同版本模块、参数和报告格式可能不一致。"
   },
   {
     "id": "media",
@@ -208,7 +235,10 @@ export const scripts = [
     ],
     "command": null,
     "status": "仅官方来源",
-    "checkedAt": "2026-11-03"
+    "checkedAt": "2026-11-03",
+    "codeUrl": "https://github.com/lmc999/RegionRestrictionCheck/blob/b6d4a6f9a87fc6eae6d3e62d0092ececcec8e844/check.sh",
+    "docsUrl": "https://github.com/lmc999/RegionRestrictionCheck#readme",
+    "outputGuide": "可访问或识别地区只代表当前出口与当前测试结果，不保证付费内容或账号长期可用。"
   },
   {
     "id": "speedtest",
@@ -229,7 +259,53 @@ export const scripts = [
     ],
     "command": null,
     "status": "仅官方来源",
-    "checkedAt": "2026-11-03"
+    "checkedAt": "2026-11-03",
+    "docsUrl": "https://www.speedtest.net/apps/cli",
+    "outputGuide": "记录服务器、时间、上传/下载和延迟；不同目标或时段的成绩不能当作固定端口能力。"
+  },
+  {
+    "id": "iperf3",
+    "name": "iperf3 双机带宽测试",
+    "eyebrow": "NETWORK / TWO HOSTS",
+    "category": "网络检测",
+    "icon": "network",
+    "desc": "在自己控制的两台机器之间测吞吐，分清上传与反向下载。",
+    "tags": [
+      "双机测速",
+      "TCP",
+      "JSON"
+    ],
+    "permission": "安装通常需要 sudo；运行使用普通用户",
+    "traffic": "可能占满链路；按时长与带宽限制测试",
+    "license": "BSD-3-Clause；依赖许可另计",
+    "source": "https://github.com/esnet/iperf",
+    "codeUrl": "https://github.com/esnet/iperf/tree/master/src",
+    "docsUrl": "https://software.es.net/iperf/invoking.html",
+    "command": null,
+    "status": "使用教程 · 本机 CLI",
+    "note": "仅测试自己控制或明确授权的目标。先通过系统软件仓库安装，不自动开放防火墙。默认 TCP 5201，仅允许客户端地址访问，用完关闭端口。",
+    "dataFlow": "客户端与自选服务端交换测试流量；双方看到连接 IP。本站不接收测速结果。",
+    "checkedAt": "2026-11-03",
+    "outputGuide": "查看 sender/receiver 吞吐和重传。-R 反转数据方向；JSON 文件仍是 iperf 格式，当前报告页不支持导入。",
+    "usage": [
+      [
+        "安装（两端，Ubuntu / Debian）",
+        "sudo apt update\nsudo apt install iperf3"
+      ],
+      [
+        "服务端（自己控制的另一台机器）",
+        "iperf3 -s -1"
+      ],
+      [
+        "客户端上传（先替换 SERVER_IP）",
+        "iperf3 -c SERVER_IP -t 10 -b 20M -J > iperf-upload.json"
+      ],
+      [
+        "反向下载（服务端需再次启动单次监听）",
+        "iperf3 -c SERVER_IP -R -t 10 -b 20M -J > iperf-download.json"
+      ]
+    ],
+    "example": "示意，非实测：\nsender：约 20 Mbit/s\nreceiver：约 20 Mbit/s\n10 秒 × 20 Mbit/s ≈ 25 MB 单方向数据，不含协议开销。"
   }
 ];
 export const posts = [

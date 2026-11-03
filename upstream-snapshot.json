@@ -35,15 +35,15 @@
     "nodequality": {
       "repo": "LloydAsp/NodeQuality",
       "branch": "main",
-      "pinned": null,
+      "pinned": "a92fca6c0067df29ddd03fdc2fee6f3000f64545",
       "upstream": {
         "sha": "a92fca6c0067df29ddd03fdc2fee6f3000f64545",
         "date": "2026-03-17T22:38:47Z",
         "url": "https://github.com/LloydAsp/NodeQuality/commit/a92fca6c0067df29ddd03fdc2fee6f3000f64545"
       },
       "checkedAt": "2026-11-03T04:09:47.009Z",
-      "adoption": "仅链接官方来源",
-      "validation": "来源与说明核对；未做真实 VPS 全流程实测"
+      "adoption": "固定入口提交",
+      "validation": "官方入口和说明核对；未做真实 VPS 全流程实测"
     },
     "nexttrace": {
       "repo": "nxtrace/NTrace-core",
@@ -87,41 +87,41 @@
     "tcpquality": {
       "repo": "ibsgss/TcpQuality",
       "branch": "main",
-      "pinned": null,
+      "pinned": "75a4e487d2038b85d04a0eb6a7f687d3547de572",
       "upstream": {
         "sha": "75a4e487d2038b85d04a0eb6a7f687d3547de572",
         "date": "2026-11-02T06:38:56Z",
         "url": "https://github.com/ibsgss/TcpQuality/commit/75a4e487d2038b85d04a0eb6a7f687d3547de572"
       },
       "checkedAt": "2026-11-03T04:09:48.416Z",
-      "adoption": "仅链接官方来源",
-      "validation": "来源与说明核对；未做真实 VPS 全流程实测"
+      "adoption": "固定入口提交",
+      "validation": "官方入口和说明核对；未做真实 VPS 全流程实测"
     },
     "ecs": {
       "repo": "oneclickvirt/ecs",
       "branch": "master",
-      "pinned": null,
+      "pinned": "01a8003f840292396d1364a1dfef82a9a8f8b597",
       "upstream": {
         "sha": "01a8003f840292396d1364a1dfef82a9a8f8b597",
         "date": "2026-10-26T06:58:46Z",
         "url": "https://github.com/oneclickvirt/ecs/commit/01a8003f840292396d1364a1dfef82a9a8f8b597"
       },
       "checkedAt": "2026-11-03T04:09:48.831Z",
-      "adoption": "仅链接官方来源",
-      "validation": "来源与说明核对；未做真实 VPS 全流程实测"
+      "adoption": "固定 Go 安装器入口",
+      "validation": "官方入口和说明核对；未做真实 VPS 全流程实测"
     },
     "media": {
       "repo": "lmc999/RegionRestrictionCheck",
       "branch": "main",
-      "pinned": null,
+      "pinned": "b6d4a6f9a87fc6eae6d3e62d0092ececcec8e844",
       "upstream": {
         "sha": "b6d4a6f9a87fc6eae6d3e62d0092ececcec8e844",
         "date": "2025-12-08T03:20:40Z",
         "url": "https://github.com/lmc999/RegionRestrictionCheck/commit/b6d4a6f9a87fc6eae6d3e62d0092ececcec8e844"
       },
       "checkedAt": "2026-11-03T04:09:49.250Z",
-      "adoption": "仅链接官方来源",
-      "validation": "来源与说明核对；未做真实 VPS 全流程实测"
+      "adoption": "固定入口提交",
+      "validation": "官方入口和说明核对；未做真实 VPS 全流程实测"
     },
     "speedtest": {
       "repo": null,
@@ -129,7 +129,7 @@
       "pinned": null,
       "upstream": null,
       "checkedAt": "2026-11-03T04:09:49.250Z",
-      "adoption": "仅链接官方来源",
+      "adoption": "官方安装命令示例；可变软件源",
       "validation": "来源与说明核对；未做真实 VPS 全流程实测"
     },
     "iperf3": {

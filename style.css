@@ -7,7 +7,7 @@
 
 .quick-command{margin:16px 0;border:1px solid #34394c;border-radius:10px;padding:12px;min-width:0}.quick-command summary,.version-details summary{cursor:pointer;color:#c5baff;font-size:14px}.quick-command p{font-size:12px;line-height:1.8;margin-top:12px}.quick-command pre{white-space:pre-wrap;overflow-wrap:anywhere;font-size:12px;max-width:100%}.version-details{margin:16px 0;padding:12px;border:1px solid #34394c;border-radius:10px}#script-grid{align-items:start}
 /* Warm editorial theme shared by the catalog, tools and reports. */
-:root {
+:root:not([data-theme="dark"]) {
   color-scheme: light;
   --bg: #f7f5ef;
   --panel: #fffdf8;
@@ -23,99 +23,144 @@
   --display: Georgia, "Noto Serif SC", "Songti SC", SimSun, serif;
 }
 
-body { font-size: 16px; }
-:focus-visible { outline: 2px solid var(--accent); }
-input[type="checkbox"] { accent-color: var(--accent); }
-.topbar { background: #f7f5eff5; border-color: var(--line); }
-.navlinks a, .github, .menu { color: var(--muted); }
-.navlinks a.active { color: var(--accent); }
-.github, .menu { border-color: var(--line); background: var(--panel); }
-.brand-mark { background: var(--accent); box-shadow: none; }
-.hero::before { content: none; }
-.hero h1, .pagehead h1, .section-head h2, .script-start h2, .prose h2 {
+:where(:root:not([data-theme="dark"])) body { font-size: 16px; }
+:where(:root:not([data-theme="dark"])) :focus-visible { outline: 2px solid var(--accent); }
+:where(:root:not([data-theme="dark"])) input[type="checkbox"] { accent-color: var(--accent); }
+:where(:root:not([data-theme="dark"])) .topbar { background: #f7f5eff5; border-color: var(--line); }
+:where(:root:not([data-theme="dark"])) .navlinks a, :where(:root:not([data-theme="dark"])) .github, :where(:root:not([data-theme="dark"])) .menu { color: var(--muted); }
+:where(:root:not([data-theme="dark"])) .navlinks a.active { color: var(--accent); }
+:where(:root:not([data-theme="dark"])) .github, :where(:root:not([data-theme="dark"])) .menu { border-color: var(--line); background: var(--panel); }
+:where(:root:not([data-theme="dark"])) .brand-mark { background: var(--accent); box-shadow: none; }
+:where(:root:not([data-theme="dark"])) .hero::before { content: none; }
+:where(:root:not([data-theme="dark"])) .hero h1, :where(:root:not([data-theme="dark"])) .pagehead h1, :where(:root:not([data-theme="dark"])) .section-head h2, :where(:root:not([data-theme="dark"])) .script-start h2, :where(:root:not([data-theme="dark"])) .prose h2 {
   font-family: var(--display);
   font-weight: 600;
   letter-spacing: -.035em;
 }
-.hero h1 { font-size: clamp(39px, 5vw, 66px); line-height: 1.14; }
-.pagehead h1 { font-size: clamp(30px, 4vw, 48px); line-height: 1.25; }
-.pagehead { padding-bottom: 34px; }
-.hero h1 em { color: var(--accent); }
-.eyebrow { letter-spacing: .13em; }
-.dot { box-shadow: none; }
-.pill, .status, .article-card .tag {
+:where(:root:not([data-theme="dark"])) .hero h1 { font-size: clamp(39px, 5vw, 66px); line-height: 1.14; }
+:where(:root:not([data-theme="dark"])) .pagehead h1 { font-size: clamp(30px, 4vw, 48px); line-height: 1.25; }
+:where(:root:not([data-theme="dark"])) .pagehead { padding-bottom: 34px; }
+:where(:root:not([data-theme="dark"])) .hero h1 em { color: var(--accent); }
+:where(:root:not([data-theme="dark"])) .eyebrow { letter-spacing: .13em; }
+:where(:root:not([data-theme="dark"])) .dot { box-shadow: none; }
+:where(:root:not([data-theme="dark"])) .pill, :where(:root:not([data-theme="dark"])) .status, :where(:root:not([data-theme="dark"])) .article-card .tag {
   background: var(--accent-soft);
   color: #853d2b;
   border-color: #e5c9ba;
 }
-.btn, .filter, .close, .quick-tools a {
+:where(:root:not([data-theme="dark"])) .btn, :where(:root:not([data-theme="dark"])) .filter, :where(:root:not([data-theme="dark"])) .close, :where(:root:not([data-theme="dark"])) .quick-tools a {
   background: var(--panel);
   color: var(--white);
   border-color: var(--line);
   border-radius: 10px;
 }
-.btn:hover, .filter:hover, .close:hover, .quick-tools a:hover { background: var(--paper); }
-.btn.primary { background: var(--accent); border-color: var(--accent); color: #fff; box-shadow: none; }
-.btn.primary:hover { background: #873723; border-color: #873723; }
-.btn:disabled { opacity: .55; cursor: not-allowed; transform: none; }
-.filter.active { background: var(--accent-soft); color: #853d2b; border-color: #d3aa97; }
+:where(:root:not([data-theme="dark"])) .btn:hover, :where(:root:not([data-theme="dark"])) .filter:hover, :where(:root:not([data-theme="dark"])) .close:hover, :where(:root:not([data-theme="dark"])) .quick-tools a:hover { background: var(--paper); }
+:where(:root:not([data-theme="dark"])) .btn.primary { background: var(--accent); border-color: var(--accent); color: #fff; box-shadow: none; }
+:where(:root:not([data-theme="dark"])) .btn.primary:hover { background: #873723; border-color: #873723; }
+:where(:root:not([data-theme="dark"])) .btn:disabled { opacity: .55; cursor: not-allowed; transform: none; }
+:where(:root:not([data-theme="dark"])) .filter.active { background: var(--accent-soft); color: #853d2b; border-color: #d3aa97; }
 
-.terminal, .metricbar, .card, .article-card, .toolpanel, .deploy-item,
-.script-start, .resultbox, .empty, dialog {
+:where(:root:not([data-theme="dark"])) .terminal, :where(:root:not([data-theme="dark"])) .metricbar, :where(:root:not([data-theme="dark"])) .card, :where(:root:not([data-theme="dark"])) .article-card, :where(:root:not([data-theme="dark"])) .toolpanel, :where(:root:not([data-theme="dark"])) .deploy-item, :where(:root:not([data-theme="dark"])) .script-start, :where(:root:not([data-theme="dark"])) .resultbox, :where(:root:not([data-theme="dark"])) .empty, :where(:root:not([data-theme="dark"])) dialog {
   background: var(--panel);
   color: var(--white);
   border-color: var(--line);
   border-radius: 16px;
 }
-.card:hover { border-color: #bba28f; transform: none; }
-.terminal { transform: none; box-shadow: 0 14px 36px #3c2c1912; }
-.term-head, .band { background: var(--paper); border-color: var(--line); }
-.term-head i { background: #c98772; }
-.term-head i:nth-child(2) { background: #d5ae74; }
-.term-head i:nth-child(3) { background: #86a590; }
-.term-head span, .term-body, .term-body .comment, .terminal-label,
-.hero-note, .metric small, .card-foot, .band p, .article-meta,
-footer, .foot-bottom, .script-start p, .prose p, .deploy-content p,
-.deploy-content li, .toolpanel label, .details dt { color: var(--muted); }
-.term-body .cmd, .details dd { color: var(--white); }
-.term-body .prompt, .metric svg, .step b, .card-foot button,
-.text-link, .back, .quick-command summary, .version-details summary { color: var(--accent); }
-.term-bottom { color: var(--green); background: #edf2ea; border-color: #cddacd; }
-.term-row, .step, .card-foot, .article-meta, footer, .foot-bottom,
-.quick-command, .version-details, .flow span { border-color: var(--line); }
-.iconbox { background: var(--accent-soft); color: #853d2b; border-color: #e5c9ba; }
-.iconbox.green { background: #e8efe6; color: #326650; border-color: #cddacd; }
-.iconbox.blue { background: #e8ecea; color: #405b55; border-color: #ced9d3; }
-.tag, .tags .tag { background: var(--paper); color: var(--muted); border-color: var(--line); }
-.card p, .toolpanel p, .article-card p { font-size: 14px; }
-.card:target { outline-color: var(--accent); }
-.input, input, select, textarea {
+:where(:root:not([data-theme="dark"])) .card:hover { border-color: #bba28f; transform: none; }
+:where(:root:not([data-theme="dark"])) .terminal { transform: none; box-shadow: 0 14px 36px #3c2c1912; }
+:where(:root:not([data-theme="dark"])) .term-head, :where(:root:not([data-theme="dark"])) .band { background: var(--paper); border-color: var(--line); }
+:where(:root:not([data-theme="dark"])) .term-head i { background: #c98772; }
+:where(:root:not([data-theme="dark"])) .term-head i:nth-child(2) { background: #d5ae74; }
+:where(:root:not([data-theme="dark"])) .term-head i:nth-child(3) { background: #86a590; }
+:where(:root:not([data-theme="dark"])) .term-head span, :where(:root:not([data-theme="dark"])) .term-body, :where(:root:not([data-theme="dark"])) .term-body .comment, :where(:root:not([data-theme="dark"])) .terminal-label, :where(:root:not([data-theme="dark"])) .hero-note, :where(:root:not([data-theme="dark"])) .metric small, :where(:root:not([data-theme="dark"])) .card-foot, :where(:root:not([data-theme="dark"])) .band p, :where(:root:not([data-theme="dark"])) .article-meta, :where(:root:not([data-theme="dark"])) footer, :where(:root:not([data-theme="dark"])) .foot-bottom, :where(:root:not([data-theme="dark"])) .script-start p, :where(:root:not([data-theme="dark"])) .prose p, :where(:root:not([data-theme="dark"])) .deploy-content p, :where(:root:not([data-theme="dark"])) .deploy-content li, :where(:root:not([data-theme="dark"])) .toolpanel label, :where(:root:not([data-theme="dark"])) .details dt { color: var(--muted); }
+:where(:root:not([data-theme="dark"])) .term-body .cmd, :where(:root:not([data-theme="dark"])) .details dd { color: var(--white); }
+:where(:root:not([data-theme="dark"])) .term-body .prompt, :where(:root:not([data-theme="dark"])) .metric svg, :where(:root:not([data-theme="dark"])) .step b, :where(:root:not([data-theme="dark"])) .card-foot button, :where(:root:not([data-theme="dark"])) .text-link, :where(:root:not([data-theme="dark"])) .back, :where(:root:not([data-theme="dark"])) .quick-command summary, :where(:root:not([data-theme="dark"])) .version-details summary { color: var(--accent); }
+:where(:root:not([data-theme="dark"])) .term-bottom { color: var(--green); background: #edf2ea; border-color: #cddacd; }
+:where(:root:not([data-theme="dark"])) .term-row, :where(:root:not([data-theme="dark"])) .step, :where(:root:not([data-theme="dark"])) .card-foot, :where(:root:not([data-theme="dark"])) .article-meta, :where(:root:not([data-theme="dark"])) footer, :where(:root:not([data-theme="dark"])) .foot-bottom, :where(:root:not([data-theme="dark"])) .quick-command, :where(:root:not([data-theme="dark"])) .version-details, :where(:root:not([data-theme="dark"])) .flow span { border-color: var(--line); }
+:where(:root:not([data-theme="dark"])) .iconbox { background: var(--accent-soft); color: #853d2b; border-color: #e5c9ba; }
+:where(:root:not([data-theme="dark"])) .iconbox.green { background: #e8efe6; color: #326650; border-color: #cddacd; }
+:where(:root:not([data-theme="dark"])) .iconbox.blue { background: #e8ecea; color: #405b55; border-color: #ced9d3; }
+:where(:root:not([data-theme="dark"])) .tag, :where(:root:not([data-theme="dark"])) .tags .tag { background: var(--paper); color: var(--muted); border-color: var(--line); }
+:where(:root:not([data-theme="dark"])) .card p, :where(:root:not([data-theme="dark"])) .toolpanel p, :where(:root:not([data-theme="dark"])) .article-card p { font-size: 14px; }
+:where(:root:not([data-theme="dark"])) .card:target { outline-color: var(--accent); }
+:where(:root:not([data-theme="dark"])) .input, :where(:root:not([data-theme="dark"])) input, :where(:root:not([data-theme="dark"])) select, :where(:root:not([data-theme="dark"])) textarea {
   color: var(--white);
   background: var(--panel);
   border-color: #bfb6a8;
 }
-.flow span { color: var(--muted); }
-.notice { color: #514c43; background: var(--paper); border-color: var(--line); }
-.notice.warn { color: #743c25; background: #f8ebdc; border-color: #e6ccb4; }
-.notice a, .prose p a, .script-start a { text-decoration: underline; text-underline-offset: .2em; }
-.script-start .quick-tools a { text-decoration: none; }
-pre, .toolpanel pre, .output, .deploy-content pre, #report-render pre, dialog pre {
+:where(:root:not([data-theme="dark"])) .flow span { color: var(--muted); }
+:where(:root:not([data-theme="dark"])) .notice { color: #514c43; background: var(--paper); border-color: var(--line); }
+:where(:root:not([data-theme="dark"])) .notice.warn { color: #743c25; background: #f8ebdc; border-color: #e6ccb4; }
+:where(:root:not([data-theme="dark"])) .notice a, :where(:root:not([data-theme="dark"])) .prose p a, :where(:root:not([data-theme="dark"])) .script-start a { text-decoration: underline; text-underline-offset: .2em; }
+:where(:root:not([data-theme="dark"])) .script-start .quick-tools a { text-decoration: none; }
+:where(:root:not([data-theme="dark"])) pre, :where(:root:not([data-theme="dark"])) .toolpanel pre, :where(:root:not([data-theme="dark"])) .output, :where(:root:not([data-theme="dark"])) .deploy-content pre, :where(:root:not([data-theme="dark"])) #report-render pre, :where(:root:not([data-theme="dark"])) dialog pre {
   color: #42382d;
   background: var(--paper);
   border: 1px solid var(--line);
   border-radius: 10px;
 }
-pre { padding: 13px 15px; }
-dialog { box-shadow: 0 24px 80px #30241d35; }
-dialog::backdrop { background: #30282066; }
-#toast { color: #244f3b; background: #edf2ea; border-color: #b8ccbc; box-shadow: 0 8px 28px #30241d24; }
+:where(:root:not([data-theme="dark"])) pre { padding: 13px 15px; }
+:where(:root:not([data-theme="dark"])) dialog { box-shadow: 0 24px 80px #30241d35; }
+:where(:root:not([data-theme="dark"])) dialog::backdrop { background: #30282066; }
+:where(:root:not([data-theme="dark"])) #toast { color: #244f3b; background: #edf2ea; border-color: #b8ccbc; box-shadow: 0 8px 28px #30241d24; }
 
 @media (max-width: 720px) {
-  .navlinks { background: var(--panel); border-color: var(--line); }
-  .hero h1 { font-size: clamp(34px, 9vw, 49px); }
+  :where(:root:not([data-theme="dark"])) .navlinks { background: var(--panel); border-color: var(--line); }
+  :where(:root:not([data-theme="dark"])) .hero h1 { font-size: clamp(34px, 9vw, 49px); }
 }
 @media (prefers-reduced-motion: reduce) {
-  html { scroll-behavior: auto; }
-  .btn, .card { transition: none; }
-  .btn:hover { transform: none; }
+  :where(:root:not([data-theme="dark"])) html { scroll-behavior: auto; }
+  :where(:root:not([data-theme="dark"])) .btn, :where(:root:not([data-theme="dark"])) .card { transition: none; }
+  :where(:root:not([data-theme="dark"])) .btn:hover { transform: none; }
 }
+
+:root[data-theme="dark"] {
+  --bg: #201e1b;
+  --panel: #2a2723;
+  --paper: #302c27;
+  --line: #484139;
+  --border: var(--line);
+  --muted: #c0b7aa;
+  --white: #f1ebe1;
+  --accent: #e6a58c;
+  --green: #9ec5ab;
+  --display: Georgia, "Noto Serif SC", "Songti SC", SimSun, serif;
+}
+[data-theme="dark"] .topbar,
+[data-theme="dark"] .navlinks.open { background: #201e1bf5; border-color: var(--line); }
+[data-theme="dark"] :is(.card,.terminal,.metricbar,.article-card,.toolpanel,.deploy-item,.script-start,.resultbox,.empty,dialog) {
+  background: var(--panel);
+  color: var(--white);
+  border-color: var(--line);
+}
+[data-theme="dark"] :is(.band,.term-head,pre,.toolpanel pre,.output,.deploy-content pre,#report-render pre,dialog pre,input,select,textarea,.filter,.btn,.close) {
+  background: var(--paper);
+  color: var(--white);
+  border-color: var(--line);
+}
+[data-theme="dark"] :is(.brand-mark,.btn.primary) { background: #d28e72; color: #241911; border-color: #d28e72; box-shadow: none; }
+[data-theme="dark"] :is(.text-link,.hero h1 em,.card-foot button,.quick-command summary,.version-details summary,.back,.step b,.term-body .prompt) { color: var(--accent); }
+[data-theme="dark"] :is(.hero-note,.metric small,.card-foot,.details dt,.term-body .comment,.foot-bottom,.article-meta,.terminal-label) { color: var(--muted); }
+[data-theme="dark"] :is(.pill,.status,.filter.active,.iconbox,.article-card .tag) { background: #3e2c24; color: var(--accent); border-color: #695042; }
+[data-theme="dark"] .hero::before { content: none; }
+[data-theme="dark"] .terminal { transform: none; }
+[data-theme="dark"] :is(.hero h1,.pagehead h1,.section-head h2,.script-start h2,.prose h2) { font-family: var(--display); }
+
+.theme-toggle {
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  flex: 0 0 38px;
+  padding: 0;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--panel);
+  color: var(--accent);
+  font: 23px/1 "Segoe UI Symbol", sans-serif;
+  margin-inline-start: -24px;
+}
+.theme-toggle:hover { background: var(--paper); }
+.theme-toggle:focus-visible { outline: 2px solid var(--accent); }
+@media (max-width: 1000px) { .theme-toggle { margin-inline-start: -10px; } }
+@media (max-width: 720px) { .theme-toggle { margin-inline-start: 0; } }

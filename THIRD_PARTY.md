@@ -9,6 +9,7 @@
 | NextTrace | https://github.com/nxtrace/NTrace-core | GPL-3.0；Geo 数据与服务条款另计 |
 | IPQuality | https://github.com/xykt/IPQuality | AGPL-3.0；多提供方会观测查询 IP |
 | sing-box | https://github.com/SagerNet/sing-box | 当前 LICENSE 为 GPL v3 或后续版本，附名称/关联文字；保留全文并复核 |
+| JC VPS | https://github.com/LauritzWu/jc-vps | GPL-3.0；网站链接至独立仓库及 v1.2.0 发布版 |
 | Hysteria | https://github.com/HyNetworks/hysteria | 核心 MIT；安装器许可另查 |
 | ArgoSBX | https://github.com/yonggekkk/argosbx | GPL-3.0；集成规划，尚未打包执行 |
 | RIPEstat | https://stat.ripe.net/docs/data-api/ | 用户主动查询 BGP/ASN；不构成 IP 风险评估 |

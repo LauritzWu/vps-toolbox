@@ -68,6 +68,28 @@ function jcPage() {
         <pre><code>${jcInstall.replaceAll('&','&amp;')}</code></pre>
         ${link(jcSource+'/blob/'+jcRevision+'/bootstrap.sh','审阅固定提交的安装入口')}${link(jcSource+'/blob/main/README.md','查看当前 README')}
       </div>
+      <div class="deploy-item" id="jc-apt">
+        <h2>新 VPS 安装前检查与 APT 排障</h2>
+        <p>在 VPS 的 root 会话中运行 <code>command -v curl</code>。如果有输出，可以直接运行上方的 JC 安装命令。如果缺少 curl，先刷新软件包索引，再安装 curl 和 CA 证书。</p>
+        <pre><code>apt-get --error-on=any update &amp;&amp;
+apt-get install -y curl ca-certificates</code></pre>
+        <p><code>&amp;&amp;</code> 会在索引更新失败时跳过安装。<code>full-upgrade</code> 可以留到系统维护时单独安排。</p>
+        <h3>APT 提示锁被占用</h3>
+        <p>新 VPS 首次启动时，<code>cloud-init</code> 可能正在后台更新软件包索引。把示例中的 <code>992</code> 换成报错显示的进程号。</p>
+        <pre><code>ps -p 992 -o pid,ppid,etime,stat,args</code></pre>
+        <p>等任务结束后再重试。如果长时间没有进展，先核对父进程和 <code>cloud-init</code> 日志。保留 APT 锁文件，由进程退出时释放锁。</p>
+        <h3>下载软件包时报 404 Not Found</h3>
+        <p>如果错误指向某个版本的 <code>.deb</code> 文件，先刷新索引再重试。若错误显示 APT 正在通过 IPv6 下载，也可以临时用 IPv4 测试。</p>
+        <pre><code>apt-get -o Acquire::ForceIPv4=true --error-on=any update &amp;&amp;
+apt-get -o Acquire::ForceIPv4=true install -y curl ca-certificates</code></pre>
+        <p>这个参数只作用于当次命令。一次 BreaCloud Ubuntu 24.04 重装中，首次启动的更新占用了 APT 锁，软件包下载也出现了 404。锁释放后，刷新索引并临时走 IPv4，基础工具和 JC 随后安装成功。旧索引和 IPv6 路径各自的影响未单独验证。</p>
+        <h3>安装后验证</h3>
+        <ol>
+          <li>把新节点导入 NekoBox 或常用客户端，选中它并打开平时使用的网站，确认实际流量能走通。</li>
+          <li>如果通过 Sub-Store 分发，在客户端手动更新一次订阅，确认能拉到新节点。</li>
+          <li>如果已配置极简探针，在监控面板确认 VPS 显示在线。</li>
+        </ol>
+      </div>
       <div class="deploy-item">
         <h2>更新、回退与卸载</h2>
         <div class="deploy-content">

@@ -20,8 +20,8 @@ function home(){return `<section class="hero"><div><span class="pill"><span clas
 function scriptsPage(){return head('SCRIPT LIBRARY','好用的脚本，清楚的来路。','按场景找到工具，运行前了解版本、实测状态、权限、流量和结果去向。本站展示并生成命令，不在网页里执行 VPS 操作。')+`<section class="script-start"><div><span class="eyebrow">START HERE</span><h2>先选目标，再选工具。</h2><p>验收资源选 YABS；看回程选 NextTrace；双机带宽选 iperf3。综合测试选一项即可，避免重复消耗流量。</p><a href="/article?id=report-walkthrough">第一次使用：从 SSH 到网页报告 →</a></div><div><h3>快速目录</h3><div class="quick-tools">${catalog.scripts.map(s=>`<a href="#tool-${esc(s.id)}" data-jump="${esc(s.id)}">${esc(s.name)}</a>`).join('')}</div></div></section><div class="toolbar"><div class="filters">${['全部','系统初始化','性能测试','网络检测'].map((x,i)=>`<button class="filter ${i===0?'active':''}" data-filter="${x}">${x}</button>`).join('')}</div><input class="search" id="script-search" aria-label="搜索脚本" placeholder="搜索名称、用途或标签…" type="search"></div><div class="grid" id="script-grid">${catalog.scripts.map(scriptCard).join('')}</div><div class="notice">版本记录为核查快照，非实时追踪；详情显示对应时间。上游脚本未完成全链安全审计与发行版实测，固定入口不等于固定所有依赖。重负载测试请先确认服务商政策和流量额度。</div>`}
 
 const jcSource = 'https://github.com/LauritzWu/jc-vps';
-const jcRelease = jcSource + '/releases/tag/v1.2.0';
-const jcRevision = '27c778b721f5ae6cef9b77d78c493a209a9ee8f0';
+const jcRelease = jcSource + '/releases/tag/v1.4.0';
+const jcRevision = '9c2d6b5dce707f5a2eab2fc04934d280257d6592';
 const jcInstall = [
   'revision=' + jcRevision,
   's=$(curl -4fsSL -m 25 "https://raw.githubusercontent.com/LauritzWu/jc-vps/$revision/bootstrap.sh") &&',
@@ -30,43 +30,54 @@ const jcInstall = [
 
 function jcListing() {
   return `<article class="deploy-item">
-    <div class="deploy-heading"><span class="iconbox">${icon('terminal')}</span><div><h2>JC VPS</h2><p>面向个人 VPS 的 sing-box 安装与管理工具</p></div><span class="status">v1.2.0</span></div>
+    <div class="deploy-heading"><span class="iconbox">${icon('terminal')}</span><div><h2>JC VPS</h2><p>面向个人 VPS 的 sing-box 安装与管理工具</p></div><span class="status">v1.4.0</span></div>
     <p>在一台 VPS 上部署五种协议，选择 IPv4 或 IPv6 节点地址，并发布带密码的 HTTPS 订阅。支持单协议换端口、配置备份及失败回滚。</p>
-    <div class="actions"><a class="btn primary" href="/deploy/jc-vps">查看安装与验收范围 ${icon('arrow')}</a>${link(jcSource,'GitHub 源码')}${link(jcRelease,'v1.2.0 发布说明')}</div>
+    <div class="actions"><a class="btn primary" href="/deploy/jc-vps">查看安装与验收范围 ${icon('arrow')}</a>${link(jcSource,'GitHub 源码')}${link(jcRelease,'v1.4.0 发布说明')}</div>
   </article>`;
 }
 
 function jcPage() {
   return head('DEPLOYMENT CENTER / JC VPS','JC VPS','用官方 APT 版 sing-box 部署五种协议，从同一个菜单管理节点、服务与订阅。') + `
-    <div class="actions"><a class="btn primary" href="#jc-install">安装 v1.2.0 ${icon('arrow')}</a>${link(jcSource,'GitHub 源码')}${link(jcRelease,'v1.2.0 发布说明')}<a class="btn" href="/deploy">返回部署中心</a></div>
+    <div class="actions"><a class="btn primary" href="#jc-install">安装 v1.4.0 ${icon('arrow')}</a>${link(jcSource,'GitHub 源码')}${link(jcRelease,'v1.4.0 发布说明')}<a class="btn" href="/deploy">返回部署中心</a></div>
     <section class="section">
       <div class="deploy-item">
         <div class="deploy-heading"><span class="iconbox">${icon('layers')}</span><h2>五协议，一套管理菜单</h2></div>
         <div class="deploy-content">
           <div><h3>TCP 节点</h3><ul><li>REALITY</li><li>VMess WS + TLS</li><li>AnyTLS</li></ul><h3>UDP 节点</h3><ul><li>Hysteria 2</li><li>TUIC</li></ul></div>
-          <div><h3>订阅与日常管理</h3><p>支持链接和二维码，以及采用 HTTPS Basic Auth 的单节点与聚合订阅，格式包括 sing-box JSON 和 Base64 链接。</p><p>查看服务状态、设置开机启动、调整单协议端口。换端口前备份配置，应用失败时尝试回滚。已有 REALITY / Hysteria 2 主备可继续通过 JC 管理。</p></div>
+          <div><h3>订阅与日常管理</h3><p>支持链接和二维码，以及采用 HTTPS Basic Auth 的单节点与聚合订阅，格式包括 sing-box JSON 和 Base64 链接。</p><p>可查看服务状态、管理开机自启、调整单协议端口。启用 UFW 后，智能模式可按需管理 JC 的本机放行规则。换端口前备份配置，应用失败时尝试回滚。</p></div>
         </div>
       </div>
       <div class="deploy-item">
         <h2>兼容性与验收范围</h2>
         <div class="deploy-content">
-          <div><h3>Ubuntu 24.04 LTS / Debian 13</h3><p>两套系统均在 x86_64、IPv4 环境完成验收，覆盖五协议公网连通、公信证书签发、订阅认证、重启恢复、内核切换及失败回退、卸载重装。</p></div>
-          <div><h3>IPv6 节点</h3><p>JC 每次安装选择一种节点地址。项目记录显示五协议通过公网 IPv6 连通测试，IPv6 订阅在隔离环境验收，分享链接通过 v2rayN 导入检查。下载安装脚本和依赖仍需要 IPv4 出站。</p></div>
+          <div><h3>v1.4.0 公网 IPv4</h3><p>在 Ubuntu 24.04 LTS 上验证五协议代理、公信证书签发、HTTPS 订阅认证、换端口、UFW 回滚和卸载。证书自然续期待实测。</p></div>
+          <div><h3>历史版本与 IPv6</h3><p>历史版本覆盖 Ubuntu 24.04 LTS、Debian 13 的公网 IPv4，以及五协议公网 IPv6。v1.4.0 的公网 IPv6 仍待实测。下载安装脚本和依赖需要 IPv4 出站。</p></div>
         </div>
         <p>REALITY 默认使用自有域名。选择外部握手目标时，其余四个协议的 TLS 证书及 HTTPS 订阅仍需自有域名，订阅使用 TCP 8443。该模式的公网订阅仍待端到端验收。</p>
         ${link(jcSource+'/releases/tag/v1.1.0','查看 IPv6 测试记录')}${link(jcSource+'/blob/main/docs/vps-acceptance.md','查看完整验收清单')}
       </div>
       <div class="deploy-item" id="jc-install">
-        <h2>在 VPS 上安装 v1.2.0</h2>
-        <aside class="notice"><strong>安全提醒 · 这段命令以 root 执行远程代码</strong><p>安装前审阅固定提交的源码，备份配置并保留可用的 SSH 会话。安装涉及系统软件包、服务和节点配置。订阅地址与密码、节点链接、二维码和私钥都应私下保存，分享日志前先删除这些信息。</p></aside>
+        <h2>在 VPS 上安装 v1.4.0</h2>
         <ol>
-          <li>准备直指 VPS 的域名、可用于 Caddy 签发证书的公网 TCP 80，以及装有 curl 的 root Bash 会话。</li>
-          <li>核对源码后，在 VPS 上运行项目 README 提供的固定版本命令。</li>
-          <li>主菜单选「1 一键安装 sing-box」或直接回车，按向导设置节点地址、端口及 UUID。确认后安装，完成时回车查看节点。</li>
-          <li>按向导输出放行云防火墙的 TCP / UDP 端口，用客户端验证连通后，在「服务管理」开启自启动。发布订阅后检查匿名访问返回 401，正确认证后返回 200。</li>
+          <li>用 root 登录 Ubuntu 或 Debian，确认系统时间准确，能通过 IPv4 访问 GitHub 和 APT。缺少 curl 时，参见 <a href="#jc-apt">APT 排障</a>。选自有域名与公信证书时，先把域名解析到 VPS，确保公网 TCP 80 可用于签发和续期。</li>
+          <li>核对源码后运行下方固定版本命令，主菜单选「1 一键安装 sing-box」。JC 会补齐所需依赖，向导可以自动选端口。</li>
+          <li>如果云防火墙限制入站，按确认页列出的 TCP、UDP 端口放行。已启用的本机 UFW 可交给 JC 智能模式管理。安装成功后会启用开机自启，导入节点并用客户端验证实际流量。</li>
         </ol>
         <pre><code>${jcInstall.replaceAll('&','&amp;')}</code></pre>
+        <p>安装命令以 root 执行固定提交的远程代码。保留可用的 SSH 会话，私下保存 UUID、节点链接、二维码和订阅凭据。</p>
         ${link(jcSource+'/blob/'+jcRevision+'/bootstrap.sh','审阅固定提交的安装入口')}${link(jcSource+'/blob/main/README.md','查看当前 README')}
+      </div>
+      <div class="deploy-item" id="jc-optional-maintenance">
+        <h2>可选维护与调优</h2>
+        <p>先装好 JC 并验证节点，再按实际需要单独安排以下操作。</p>
+        <ul>
+          <li><strong>全系统升级</strong>。安排在系统维护时段，先查看拟变更的软件包，再决定是否升级及重启。</li>
+          <li><strong>时区</strong>。按查看日志的习惯选择 UTC 或本地时区，保持系统时间同步。</li>
+          <li><strong>BBR</strong>。先检查现有拥塞控制，确实需要时再做 TCP 调优和前后对比。</li>
+          <li><strong>Swap</strong>。根据内存压力与磁盘条件决定，优先用于低内存 VPS 的维护。</li>
+          <li><strong>tcpfit</strong>。第三方 TCP 调优工具。先记录基线，在测试机上用同一节点和同一目标对比，验证回滚后再考虑应用到生产机。TCP 测速结果不能推断 HY2、TUIC 的 UDP 表现。</li>
+        </ul>
+        ${link('https://github.com/Kylin010/tcpfit','tcpfit 上游说明')}
       </div>
       <div class="deploy-item" id="jc-apt">
         <h2>新 VPS 安装前检查与 APT 排障</h2>
@@ -94,7 +105,7 @@ apt-get -o Acquire::ForceIPv4=true install -y curl ca-certificates</code></pre>
         <h2>更新、回退与卸载</h2>
         <div class="deploy-content">
           <div><h3>更新 JC 与 sing-box</h3><p>日常输入 <code>jc</code> 打开固定版本的菜单。更新 JC 前，备份配置并查看项目发布说明，按目标版本提供的入口运行。</p><p>更新 sing-box 时，在「系统工具 → 查看或更新官方内核」选择官方 APT 候选或指定版本。服务会短暂重启。JC 预留原版本安装包，在安装、配置校验或监听检查失败时尝试恢复。更新后用客户端复测。</p></div>
-          <div><h3>完整卸载或重装</h3><p>主菜单选「2 完整卸载 sing-box 和 JC」，输入 <code>1</code> 确认。卸载会停止 JC 服务，移除官方软件包及 JC 节点配置、凭据、订阅文件和快捷命令。Caddy 网站及订阅路由定义、证书、防火墙和手动备份会保留。重装可使用本页的固定版本命令。</p></div>
+          <div><h3>完整卸载或重装</h3><p>主菜单选「2 完整卸载 sing-box 和 JC」，输入 <code>1</code> 确认。卸载会停止 JC 服务，移除官方软件包及 JC 节点配置、凭据、订阅文件和快捷命令，并清理闲置的 JC 自建 UFW 规则。Caddy 网站、证书、仍在用的规则及手动备份会保留。重装可使用本页的固定版本命令。</p></div>
         </div>
       </div>
       <div class="deploy-item">

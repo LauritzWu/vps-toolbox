@@ -81,14 +81,23 @@ function jcPage() {
       </div>
       <div class="deploy-item" id="jc-apt">
         <h2>新 VPS 安装前检查与 APT 排障</h2>
-        <p>在 VPS 的 root 会话中运行 <code>command -v curl</code>。如果有输出，可以直接运行上方的 JC 安装命令。如果缺少 curl，先刷新软件包索引，再安装 curl 和 CA 证书。</p>
+        <p>在 VPS 的 root 会话中运行 <code>command -v curl</code>。首次登录的新机先查看下方的初始化检查。系统就绪后，如果有输出，可以运行上方的 JC 安装命令。如果缺少 curl，先刷新软件包索引，再安装 curl 和 CA 证书。</p>
         <pre><code>apt-get --error-on=any update &amp;&amp;
 apt-get install -y curl ca-certificates</code></pre>
         <p><code>&amp;&amp;</code> 会在索引更新失败时跳过安装。<code>full-upgrade</code> 可以留到系统维护时单独安排。</p>
-        <h3>APT 提示锁被占用</h3>
-        <p>新 VPS 首次启动时，<code>cloud-init</code> 可能正在后台更新软件包索引。把示例中的 <code>992</code> 换成报错显示的进程号。</p>
-        <pre><code>ps -p 992 -o pid,ppid,etime,stat,args</code></pre>
-        <p>等任务结束后再重试。如果长时间没有进展，先核对父进程和 <code>cloud-init</code> 日志。保留 APT 锁文件，由进程退出时释放锁。</p>
+        <h3>首次开机与 APT 锁被占用</h3>
+        <p>SSH 已经可以登录时，Ubuntu 云镜像仍可能在用 <code>cloud-init</code> 执行首次初始化，包括刷新软件包索引。如果系统有 <code>cloud-init</code>，在 SSH 终端最多等两分钟，再看状态。</p>
+        <pre><code>timeout 120s cloud-init status --wait --long</code></pre>
+        <p>显示 <code>done</code> 后可以继续。等待超时只会结束查询，初始化仍会在后台运行。如果 JC 文件显示 <code>OK</code> 后提示 <code>Could not get lock /var/lib/apt/lists/lock</code>，用报错中的 PID 替换示例里的 <code>1234</code>。</p>
+        <pre><code>ps -p 1234 -o pid,ppid,etime,stat,args
+lslocks -n -o PID,COMMAND,PATH | awk '$3 == "/var/lib/apt/lists/lock"'
+tail -n 40 /var/log/cloud-init-output.log</code></pre>
+        <p>如果任务还有进展，等它结束。如果长时间没有进展，并且确认占锁的是同一个 <code>apt-get … update</code> 进程，可对该 PID 执行 <code>kill -TERM 1234</code>，结束本轮索引刷新。保留锁文件和 <code>cloud-init</code> 父进程。中断刷新可能会被初始化记录为失败。</p>
+        <h3>首次刷新索引反复超时</h3>
+        <p>等主锁查询没有输出、初始化结束后，用 IPv4 在前台刷新一次。连接及数据传输超时设为 15 秒，关闭自动重试，便于看到哪个源报错。刷新成功后再运行 JC 安装命令。</p>
+        <pre><code>apt-get -o Acquire::ForceIPv4=true -o Acquire::http::Timeout=15 -o Acquire::https::Timeout=15 -o Acquire::Retries=0 --error-on=any update</code></pre>
+        <p>同一个源反复报错时，先从 VPS 验证该地址，再换用从这台 VPS 能稳定访问的 Ubuntu 镜像。如果对同一源多次测试都只有 IPv4 能成功，检查 VPS 的 IPv6 路由，或让 APT 持久使用 IPv4。若每次重装都复现，可将已验证的 APT 设置放进服务商支持的首次开机配置或自定义镜像，使其在首轮刷新之前生效。</p>
+        ${link('https://cloudinit.readthedocs.io/en/latest/explanation/boot.html','cloud-init 启动阶段')}${link('https://manpages.ubuntu.com/manpages/noble/man1/apt-transport-http.1.html','Ubuntu APT 超时参数')}
         <h3>下载软件包时报 404 Not Found</h3>
         <p>如果错误指向某个版本的 <code>.deb</code> 文件，先刷新索引再重试。若错误显示 APT 正在通过 IPv6 下载，也可以临时用 IPv4 测试。</p>
         <pre><code>apt-get -o Acquire::ForceIPv4=true --error-on=any update &amp;&amp;
